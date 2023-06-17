@@ -6,7 +6,7 @@ using SimpraFinalProject.Application.Features.Commands.Products.UpdateProduct;
 using SimpraFinalProject.Application.Features.Queries.Products.GetAllProduct;
 using System.Net;
 
-namespace SimpraWeek3Homework.API.Controllers
+namespace SimpraFinalProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

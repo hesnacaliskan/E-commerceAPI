@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\aw3-hesnacaliskan\SimpraWeek3Homework\Core\SimpraWeek3Homework.Application\SimpraFinalProject.Application.csproj" />
-    <ProjectReference Include="..\..\..\..\aw3-hesnacaliskan\SimpraWeek3Homework\Infrastructure\SimpraWeek3Homework.Persistence\SimpraFinalProject.Persistence.csproj" />
+    <ProjectReference Include="..\..\Core\SimpraFinalProject.Application\SimpraFinalProject.Application.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\SimpraFinalProject.Persistence\SimpraFinalProject.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

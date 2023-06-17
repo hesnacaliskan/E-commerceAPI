@@ -6,7 +6,7 @@ using SimpraFinalProject.Application.Features.Commands.Categories.UpdateCategory
 using SimpraFinalProject.Application.Features.Queries.Categories.GetAllCategory;
 using System.Net;
 
-namespace SimpraWeek3Homework.API.Controllers
+namespace SimpraFinalProject.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
