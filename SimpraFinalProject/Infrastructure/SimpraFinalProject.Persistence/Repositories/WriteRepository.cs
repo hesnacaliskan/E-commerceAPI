@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using SimpraFinalProject.Application.Repositories;
+using SimpraFinalProject.Domain.Common;
 using SimpraFinalProject.Persistence.Contexts;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SimpraFinalProject.Persistence.Repositories
 {
-    public class WriteRepository<T> : IWriteRepository<T> where T : class
+    public class WriteRepository<T> : IWriteRepository<T> where T : BaseEntity
     {
         private readonly SimpraFinalProjectDbContext _context;
 

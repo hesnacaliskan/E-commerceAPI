@@ -26,6 +26,8 @@ namespace SimpraFinalProject.Application.Features.Commands.Products.CreateProduc
                 CategoryId = request.CategoryId,
                 Tag = request.Tag,
                 Url = request.Url,                
+                Price = request.Price,
+                Stock = request.Stock,
                 CreatedBy = request.CreatedBy,
                 UpdatedBy = request.UpdatedBy,
                 CreatedAt = DateTime.UtcNow,

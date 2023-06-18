@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SimpraFinalProject.Application.Repositories;
+using SimpraFinalProject.Domain.Common;
 using SimpraFinalProject.Persistence.Contexts;
 using System;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SimpraFinalProject.Persistence.Repositories
 {
-    public class ReadRepository<T> : IReadRepository<T> where T : class
+    public class ReadRepository<T> : IReadRepository<T> where T : BaseEntity
     {
         private readonly SimpraFinalProjectDbContext _context;
 

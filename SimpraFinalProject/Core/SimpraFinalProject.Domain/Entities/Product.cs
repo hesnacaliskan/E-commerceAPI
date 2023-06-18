@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using SimpraFinalProject.Domain.Common;
 using SimpraFinalProject.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,19 +12,15 @@ using System.Threading.Tasks;
 namespace SimpraFinalProject.Domain.Entities
 {
     [Table("Product", Schema = "dbo")]
-    public class Product
+    public class Product : BaseEntity
     {
-        public int Id { get; set; }
-        public DateTime? CreatedAt { get; set; }
-        public string CreatedBy { get; set; }
-        public DateTime? UpdatedAt { get; set; }
-        public string UpdatedBy { get; set; }
         public int CategoryId { get; set; }
         public string Name { get; set; }
         public string Url { get; set; }
         public string Tag { get; set; }
-        public Category Category { get; set; }
-
+        public int Stock { get; set; }
+        public float Price { get; set; }
+        public ICollection<Category> Categories { get; set; }
 
 
     }
@@ -42,13 +39,11 @@ namespace SimpraFinalProject.Domain.Entities
             builder.Property(x => x.Url).IsRequired(true).HasMaxLength(30);
             builder.Property(x => x.Tag).IsRequired(true).HasMaxLength(100);
             builder.Property(x => x.CategoryId).IsRequired(true);
+            builder.Property(x => x.Price).IsRequired(true);
+            builder.Property(x => x.Stock).IsRequired(true);
 
             builder.HasIndex(x => x.Name).IsUnique(true);
 
-            builder.HasOne(x => x.Category)
-                .WithMany(x => x.Products)
-                .HasForeignKey(x => x.CategoryId)
-                .IsRequired();
         }
 
     }

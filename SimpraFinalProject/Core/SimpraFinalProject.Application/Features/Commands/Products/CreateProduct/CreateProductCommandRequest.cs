@@ -15,6 +15,8 @@ namespace SimpraFinalProject.Application.Features.Commands.Products.CreateProduc
         public string UpdatedBy { get; set; }
         public int CategoryId { get; set; }
         public string Name { get; set; }
+        public int Stock { get; set; }
+        public float Price { get; set; }
         public string Url { get; set; }
         public string Tag { get; set; }
     }
