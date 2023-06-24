@@ -14,6 +14,7 @@ namespace SimpraFinalProject.Application.Features.Queries.Categories.GetAllCateg
         public DateTime? UpdatedAt { get; set; }
         public string UpdatedBy { get; set; }
         public string Name { get; set; }
-        public int Order { get; set; }
+        
+
     }
 }

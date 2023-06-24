@@ -1,11 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using SimpraFinalProject.Application.Abstractions.Services;
+using SimpraFinalProject.Application.Abstractions.Services.Authentications;
 using SimpraFinalProject.Application.Repositories.Categories;
 using SimpraFinalProject.Application.Repositories.Products;
 using SimpraFinalProject.Domain.Entities.Identity;
 using SimpraFinalProject.Persistence.Contexts;
 using SimpraFinalProject.Persistence.Repositories.Categories;
+using SimpraFinalProject.Persistence.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +27,13 @@ namespace SimpraFinalProject.Persistence
             services.AddScoped<ICategoryWriteRepository, CategoryWriteRepository>();           
             services.AddScoped<IProductReadRepository, ProductReadRepository>();
             services.AddScoped<IProductWriteRepository, ProductWriteRepository>();
+
+
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IInternalAuthentication, AuthService>();
+            
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpraWeek3Homework.Application.Mapping
+namespace SimpraFinalProject.Application.Mapping
 {
     public class GeneralMapping : Profile
     {

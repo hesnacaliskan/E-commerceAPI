@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SimpraFinalProject.Application.Features.Commands.AppUser.CreateUser
+namespace SimpraFinalProject.Application.DTOs.User
 {
-    public class CreateUserCommandResponse
+    public class CreateUserResponse
     {
         public bool Succeeded { get; set; }
         public string Message { get; set; }

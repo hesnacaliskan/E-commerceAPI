@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using SimpraFinalProject.Application.Abstractions.Services;
+using SimpraFinalProject.Application.DTOs.User;
 using SimpraFinalProject.Application.Repositories.Categories;
 using System;
 using System.Collections.Generic;
@@ -10,13 +12,29 @@ namespace SimpraFinalProject.Application.Features.Commands.AppUser.CreateUser
 {
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommandRequest, CreateUserCommandResponse>
     {
-        public CreateUserCommandHandler()
+        readonly IUserService _userService;
+        public CreateUserCommandHandler(IUserService userService)
         {
+            _userService = userService;
         }
 
-        public Task<CreateUserCommandResponse> Handle(CreateUserCommandRequest request, CancellationToken cancellationToken)
+        public async Task<CreateUserCommandResponse> Handle(CreateUserCommandRequest request, CancellationToken cancellationToken)
         {
-            throw new NotImplementedException();
+            CreateUserResponse response = await _userService.CreateAsync(new()
+            {
+                Email = request.Email,
+                NameSurname = request.NameSurname,
+                Password = request.Password,
+                PasswordConfirm = request.PasswordConfirm,
+                Username = request.Username,
+            });
+
+            return new()
+            {
+                Message = response.Message,
+                Succeeded = response.Succeeded,
+            };
+
         }
     }
 }
