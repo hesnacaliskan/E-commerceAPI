@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SimpraFinalProject.Application.Features.Commands.AppUser.LoginUser;
+using SimpraFinalProject.Application.Features.Commands.AppUser.RefreshTokenLogin;
 
 namespace SimpraFinalProject.API.Controllers
 {
@@ -18,6 +19,13 @@ namespace SimpraFinalProject.API.Controllers
         public async Task<IActionResult> Login(LoginUserCommandRequest loginUserCommandRequest)
         {
             LoginUserCommandResponse response = await _mediator.Send(loginUserCommandRequest);
+            return Ok(response);
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> RefreshTokenLogin([FromBody] RefreshTokenLoginCommandRequest refreshTokenLoginCommandRequest)
+        {
+            RefreshTokenLoginCommandResponse response = await _mediator.Send(refreshTokenLoginCommandRequest);
             return Ok(response);
         }
     }

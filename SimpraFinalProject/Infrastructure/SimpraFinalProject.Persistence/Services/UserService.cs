@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using SimpraFinalProject.Application.Abstractions.Services;
 using SimpraFinalProject.Application.DTOs.User;
+using SimpraFinalProject.Application.Exceptions;
 using SimpraFinalProject.Domain.Entities.Identity;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace SimpraFinalProject.Persistence.Services
         //readonly IEndpointReadRepository _endpointReadRepository;
 
         public UserService(UserManager<AppUser> userManager
-            /*IEndpointReadRepository endpointReadRepository*/)
+            /*,IEndpointReadRepository endpointReadRepository*/)
         {
             _userManager = userManager;
             //_endpointReadRepository = endpointReadRepository;
@@ -41,6 +42,18 @@ namespace SimpraFinalProject.Persistence.Services
                     response.Message += $"{error.Code} - {error.Description}\n";
 
             return response;
+        }
+
+        public async Task UpdateRefreshTokenAsync(string refreshToken, AppUser user, DateTime accessTokenDate, int addOnAccessTokenDate)
+        {
+            if (user != null)
+            {
+                user.RefreshToken = refreshToken;
+                user.RefreshTokenEndDate = accessTokenDate.AddSeconds(addOnAccessTokenDate);
+                await _userManager.UpdateAsync(user);
+            }
+            else
+                throw new NotFoundUserException();
         }
     }
 }

@@ -25,26 +25,5 @@ namespace SimpraFinalProject.Domain.Entities
 
     }
 
-    public class ProductConfiguration : IEntityTypeConfiguration<Product>
-    {
-        public void Configure(EntityTypeBuilder<Product> builder)
-        {
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.CreatedAt).IsRequired(false);
-            builder.Property(x => x.CreatedBy).IsRequired(false).HasMaxLength(30);
-            builder.Property(x => x.UpdatedAt).IsRequired(false);
-            builder.Property(x => x.UpdatedBy).IsRequired(false).HasMaxLength(30);
-
-            builder.Property(x => x.Name).IsRequired(true).HasMaxLength(30);
-            builder.Property(x => x.Url).IsRequired(true).HasMaxLength(30);
-            builder.Property(x => x.Tag).IsRequired(true).HasMaxLength(100);
-            builder.Property(x => x.CategoryId).IsRequired(true);
-            builder.Property(x => x.Price).IsRequired(true);
-            builder.Property(x => x.Stock).IsRequired(true);
-
-            builder.HasIndex(x => x.Name).IsUnique(true);
-
-        }
-
-    }
+  
 }
