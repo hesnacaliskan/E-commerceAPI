@@ -16,7 +16,7 @@ namespace SimpraFinalProject.Persistence
                 ConfigurationManager configurationManager = new();
                 configurationManager.SetBasePath(Path.Combine(Directory.GetCurrentDirectory()));
                 configurationManager.AddJsonFile("appsettings.json");
-                return configurationManager.GetConnectionString("SimpraHw3Db");
+                return configurationManager.GetConnectionString("SimpraFinal1");
             }
         }
     }
