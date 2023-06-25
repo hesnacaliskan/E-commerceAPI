@@ -2,6 +2,7 @@
 using ETicaretAPI.Application.DTOs.Order;
 using ETicaretAPI.Application.Repositories;
 using ETicaretAPI.Domain.Entities;
+using ETicaretAPI.Domain.Entities.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace ETicaretAPI.Persistence.Services
@@ -35,23 +36,24 @@ namespace ETicaretAPI.Persistence.Services
                 OrderCode = orderCode
             });
             await _orderWriteRepository.SaveAsync();
+            
         }
 
-        public async Task<ListOrder> GetAllOrdersAsync(int page, int size)
+        public async Task<ListOrder> GetAllOrdersAsync()
         {
             var query = _orderReadRepository.Table.Include(o => o.Basket)
-                      .ThenInclude(b => b.User)
+                      .ThenInclude(b => b.User)                      
                       .Include(o => o.Basket)
                          .ThenInclude(b => b.BasketItems)
-                         .ThenInclude(bi => bi.Product);
+                         .ThenInclude(bi => bi.Product);                    
+                         
 
 
 
-            var data = query.Skip(page * size).Take(size);
-            /*.Take((page * size)..size);*/
+            
 
 
-            var data2 = from order in data
+            var data2 = from order in query
                         join completedOrder in _completedOrderReadRepository.Table
                            on order.Id equals completedOrder.OrderId into co
                         from _co in co.DefaultIfEmpty()
@@ -66,17 +68,19 @@ namespace ETicaretAPI.Persistence.Services
 
             return new()
             {
-                TotalOrderCount = await query.CountAsync(),
+                TotalOrderCount = await query.CountAsync(),                
                 Orders = await data2.Select(o => new
                 {
                     Id = o.Id,
                     CreatedDate = o.CreatedDate,
                     OrderCode = o.OrderCode,
-                    TotalPrice = o.Basket.BasketItems.Sum(bi => bi.Product.Price * bi.Quantity),
+                    TotalPrice = o.Basket.BasketItems.Sum(bi => bi.Product.Price * bi.Quantity) - o.Basket.User.Point,               
                     UserName = o.Basket.User.UserName,
                     o.Completed
                 }).ToListAsync()
+                
             };
+            
         }
 
         public async Task<SingleOrder> GetOrderByIdAsync(string id)

@@ -4,7 +4,6 @@ using ETicaretAPI.Application.Features.Commands.Role.CreateRole;
 using ETicaretAPI.Application.Features.Commands.Role.DeleteRole;
 using ETicaretAPI.Application.Features.Commands.Role.UpdateRole;
 using ETicaretAPI.Application.Features.Queries.Role.GetRoleById;
-using ETicaretAPI.Application.Features.Queries.Role.GetRoles;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -24,13 +23,6 @@ namespace ETicaretAPI.API.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
-        [AuthorizeDefinition(ActionType = ActionType.Reading, Definition = "Get Roles", Menu = "Roles")]
-        public async Task<IActionResult> GetRoles([FromQuery] GetRolesQueryRequest getRolesQueryRequest)
-        {
-            GetRolesQueryResponse response = await _mediator.Send(getRolesQueryRequest);
-            return Ok(response);
-        }
 
         [HttpGet("{Id}")]
         [AuthorizeDefinition(ActionType = ActionType.Reading, Definition = "Get Role By Id", Menu = "Roles")]
