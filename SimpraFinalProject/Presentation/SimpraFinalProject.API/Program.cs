@@ -4,6 +4,7 @@ using Serilog;
 using Serilog.Context;
 using Serilog.Core;
 using Serilog.Sinks.MSSqlServer;
+using SimpraFinalProject.API.Extensions;
 using SimpraFinalProject.Application;
 using SimpraFinalProject.Infrastructure;
 using SimpraFinalProject.Persistence;
@@ -80,6 +81,7 @@ if (app.Environment.IsDevelopment())
 }
 
 //app.UseSerilogRequestLogging();
+app.ConfigureExceptionHandler<Program>(app.Services.GetRequiredService<ILogger<Program>>());
 
 app.UseHttpLogging();
 app.UseHttpsRedirection();
