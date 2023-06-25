@@ -73,12 +73,9 @@ namespace ETicaretAPI.Persistence.Services
             }
         }
 
-        public async Task<List<ListUser>> GetAllUsersAsync(int page, int size)
+        public async Task<List<ListUser>> GetAllUsersAsync()
         {
-            var users = await _userManager.Users
-                  .Skip(page * size)
-                  .Take(size)
-                  .ToListAsync();
+            var users = await _userManager.Users.ToListAsync();
 
             return users.Select(user => new ListUser
             {

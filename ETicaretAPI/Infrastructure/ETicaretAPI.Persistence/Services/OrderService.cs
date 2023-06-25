@@ -11,6 +11,8 @@ namespace ETicaretAPI.Persistence.Services
     {
         readonly IOrderWriteRepository _orderWriteRepository;
         readonly IOrderReadRepository _orderReadRepository;
+        readonly IBasketWriteRepository _basketWriteRepository;
+        readonly IBasketReadRepository _basketReadRepository;
         readonly ICompletedOrderWriteRepository _completedOrderWriteRepository;
         readonly ICompletedOrderReadRepository _completedOrderReadRepository;
 
@@ -33,12 +35,12 @@ namespace ETicaretAPI.Persistence.Services
                 Address = createOrder.Address,
                 Id = Guid.Parse(createOrder.BasketId),
                 Description = createOrder.Description,
-                OrderCode = orderCode
+                OrderCode = orderCode                
             });
-            await _orderWriteRepository.SaveAsync();
-            
-        }
+        }   
+    
 
+    
         public async Task<ListOrder> GetAllOrdersAsync()
         {
             var query = _orderReadRepository.Table.Include(o => o.Basket)
@@ -74,7 +76,7 @@ namespace ETicaretAPI.Persistence.Services
                     Id = o.Id,
                     CreatedDate = o.CreatedDate,
                     OrderCode = o.OrderCode,
-                    TotalPrice = o.Basket.BasketItems.Sum(bi => bi.Product.Price * bi.Quantity) - o.Basket.User.Point,               
+                    TotalPrice = o.Basket.BasketItems.Sum(bi => bi.Product.Price * bi.Quantity) - o.Basket.User.Point,                    
                     UserName = o.Basket.User.UserName,
                     o.Completed
                 }).ToListAsync()

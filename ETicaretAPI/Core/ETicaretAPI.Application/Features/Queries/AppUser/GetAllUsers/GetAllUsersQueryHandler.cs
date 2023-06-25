@@ -19,7 +19,7 @@ namespace ETicaretAPI.Application.Features.Queries.AppUser.GetAllUsers
 
         public async Task<GetAllUsersQueryResponse> Handle(GetAllUsersQueryRequest request, CancellationToken cancellationToken)
         {
-            var users = await _userService.GetAllUsersAsync(request.Page, request.Size);
+            var users = await _userService.GetAllUsersAsync();
             return new()
             {
                 Users = users,
